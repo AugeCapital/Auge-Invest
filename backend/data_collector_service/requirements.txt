@@ -1,0 +1,9 @@
+fastapi[all]
+uvicorn[standard]
+requests
+beautifulsoup4
+apscheduler
+psycopg2-binary # If storing collected data in PostgreSQL
+python-dotenv
+# Add other specific libraries for APIs if needed, e.g., bravado for Swagger/OpenAPI clients
+
