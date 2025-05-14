@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
+import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../styles/globals.css"; // Adjusted path for styles folder
+import { AuthProvider } from "../context/AuthContext"; // Import AuthProvider
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Auge Invest",
-  description: "Sua plataforma completa para o mercado financeiro brasileiro.",
-};
+// export const metadata: Metadata = { // Metadata is usually defined per-page or in RootLayout for App Router
+// title: "Auge Invest",
+// description: "Sua plataforma completa para o mercado financeiro brasileiro.",
+// };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <html lang="pt-BR">
-      <body className={`${inter.className} bg-gray-100 dark:bg-auge-dark-bg text-auge-light-text dark:text-auge-dark-text`}>
-        {/* TODO: Add a ThemeProvider for light/dark mode toggle if not handled by Tailwind darkMode class alone */}
-        {/* TODO: Add a global Navbar and Footer component here */}
-        <main className="min-h-screen">
-          {children}
-        </main>
-      </body>
-    </html>
+    <AuthProvider> {/* Wrap the application with AuthProvider */}
+      {/* It's common to have a RootLayout component here if using Next.js 13+ App Router, 
+          but for Pages Router, this structure is fine. 
+          The className for body is usually in a Layout component or _document.tsx for global body styles.
+      */}
+      {/* <div lang="pt-BR" className={`${inter.className} bg-gray-100 dark:bg-auge-dark-bg text-auge-light-text dark:text-auge-dark-text`}> */}
+      {/* Consider moving global layout elements (like Navbar, Footer, and body styling) to a Layout component */}
+      <main className={`${inter.className} min-h-screen bg-gray-100 dark:bg-auge-dark-bg text-auge-light-text dark:text-auge-dark-text`}>
+        <Component {...pageProps} />
+      </main>
+      {/* </div> */}
+    </AuthProvider>
   );
 }
 
