@@ -1,7 +1,7 @@
 version: "1"
 services:
   # PostgreSQL Database for Auth Service
-  - type: psql
+  - type: postgres # CORRIGIDO de psql para postgres
     name: auge-auth-db
     region: frankfurt # Or choose a region closer to you/your users
     plan: free # Or your desired plan
@@ -33,13 +33,13 @@ services:
         generateValue: true # Render can generate a secure secret key
       - key: AUTH_ACCESS_TOKEN_EXPIRE_MINUTES
         value: "30"
-      # Add any other necessary environment variables for auth_service here
-      # Example: If you have specific CORS origins
+      # Adicione quaisquer outras variáveis de ambiente necessárias para auth_service aqui
+      # Exemplo: Se você tiver origens CORS específicas
       # - key: CORS_ORIGINS
-      #   value: "https://your-frontend-domain.vercel.app,http://localhost:3000"
+      #   value: "https://SUA-URL-DO-FRONTEND.vercel.app,http://localhost:3000"
 
-# TODO: Add data_collector_service and its database (if separate) later
-# - type: psql
+# TODO: Adicionar data_collector_service e seu banco de dados (se separado) depois
+# - type: postgres 
 #   name: auge-market-data-db
 #   ...
 # - type: web
